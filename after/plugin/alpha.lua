@@ -1,0 +1,38 @@
+local dashboard = require("alpha.themes.dashboard")
+
+-- Poimandres / HIKIUVIM Minimalist Header
+dashboard.section.header.val = {
+    [[                                                              ]],
+    [[  ██╗  ██╗██╗██╗  ██╗██╗██╗   ██╗██╗   ██╗██╗███╗   ███╗      ]],
+    [[  ██║  ██║██║██║ ██╔╝██║██║   ██║██║   ██║██║████╗ ████║      ]],
+    [[  ███████║██║█████╔╝ ██║██║   ██║██║   ██║██║██╔████╔██║      ]],
+    [[  ██╔══██║██║██╔═██╗ ██║██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║      ]],
+    [[  ██║  ██║██║██║  ██╗██║╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║      ]],
+    [[  ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝      ]],
+    [[                                                              ]],
+    [[                -- System Ready, HIKIUVIM --                  ]],
+}
+
+-- 1. Poimandres Color Integration
+-- Header: Use 'Special' (Pink/Blue glow) or 'Function' (Blue)
+dashboard.section.header.opts.hl = "Special" 
+
+-- 2. Modern Menu Buttons (Matching your workflow)
+dashboard.section.buttons.val = {
+    dashboard.button("f", "󰈞  FIND FILES", ":Telescope find_files <CR>"),
+    dashboard.button("p", "󰊄  SEARCH TEXT", ":Telescope live_grep <CR>"),
+    dashboard.button("r", "󰄉  RECENT", ":Telescope oldfiles <CR>"),
+    dashboard.button("v", "󰙅  EXPLORER", ":NvimTreeToggle <CR>"),
+    dashboard.button("c", "󰒓  CONFIG", ":e ~/.config/nvim/init.lua <CR>"),
+    dashboard.button("q", "󰗼  EXIT", ":qa<CR>"),
+}
+
+-- Apply Poimandres Teal (String) to Icons and Pink (Number) to Hotkeys
+for _, button in ipairs(dashboard.section.buttons.val) do
+    button.opts.hl = "String"
+    button.opts.hl_shortcut = "Number"
+end
+
+-- 3. Footer info
+dashboard.section.footer.val = "⚡ HIKIUVIM Engine | " .. #vim.api.nvim_list_runtime_paths() .. " components"
+dashboard.section.footer.opts.hl = "Comment"
