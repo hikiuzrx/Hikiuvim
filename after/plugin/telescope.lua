@@ -22,7 +22,6 @@ telescope.setup({
 })
 
 -- Your Keymaps
-vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "Find Files" }) -- Changed to your usual 'pf'
 vim.keymap.set('n', '<leader>fs', builtin.find_files, { desc = "Find Files" }) -- Kept your 'fs' as well
 vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
 vim.keymap.set('n', '<leader>ps', function()

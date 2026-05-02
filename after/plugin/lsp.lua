@@ -1,46 +1,55 @@
 -- ~/.config/nvim/after/plugin/lsp.lua
-
--- 1️⃣ Setup completion capabilities
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
+local mason_lsp = require("mason-lspconfig")
+local uv = vim.loop
 
--- 2️⃣ Setup Mason
+-- Mason setup
 require("mason").setup()
-require("mason-lspconfig").setup({
+mason_lsp.setup({
     ensure_installed = {
-        "clangd",
-        "gopls",
-        "pyright",
-        "ts_ls",
-        "jdtls",
-        "lua_ls",
-        "html",
-        "cssls",
-        "emmet_ls",
-        "dockerls",
-        "yamlls",
-        "prismals",
-        "sqls",
+        "clangd", "gopls", "pyright", "ts_ls", "jdtls",
+        "lua_ls", "html", "cssls", "emmet_ls", "dockerls",
+        "yamlls", "prismals", "sqls","zls"
     },
 })
 
--- 3️⃣ Setup LSP servers using lspconfig (still supported)
-local lspconfig = require('lspconfig')
-
+-- Setup all servers including Python
 local servers = {
-    "clangd", "gopls", "pyright", "ts_ls", "jdtls",
-    "lua_ls", "html", "cssls", "emmet_ls", "dockerls",
-    "yamlls", "prismals", "sqls"
+    "clangd", "gopls", "ts_ls", "jdtls",
+    "lua_ls", "html", "cssls", "emmet_ls",
+    "dockerls", "yamlls", "prismals", "sqls", "pyright","zls"
 }
 
-for _, lsp in ipairs(servers) do
-    if lspconfig[lsp] then
-        lspconfig[lsp].setup({
-            capabilities = capabilities,
-        })
+for _, server in ipairs(servers) do
+    local opts = { capabilities = capabilities }
+
+    -- Python .venv auto detection
+    if server == "pyright" then
+        local cwd = vim.fn.getcwd()
+        local venv_path = cwd .. "/.venv/bin/python3"
+        if uv.fs_stat(venv_path) then
+            opts.settings = {
+                python = { pythonPath = venv_path }
+            }
+        end
+    end
+    if server == "zls" then
+    opts.settings = {
+        zls = {
+            enable_inlay_hints = true,
+            enable_snippets = true,
+            warn_style = true,
+        }
+    }
+end
+
+    if mason_lsp.get_installed_servers()[server] then
+        lspconfig[server].setup(opts)
     end
 end
 
--- 4️⃣ Common LSP keymaps
+-- LSP keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local opts = { buffer = event.buf }
@@ -57,7 +66,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- 5️⃣ Diagnostic UI
+-- Diagnostic UI
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
