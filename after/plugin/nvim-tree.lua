@@ -11,8 +11,8 @@ require("nvim-tree").setup({
 
     -- 2️⃣ Show hidden files (including .env)
     filters = {
-        dotfiles = true, -- Show dotfiles like .env
-        custom = {},      -- You can add patterns to hide specific files if needed
+        dotfiles = false, -- false = show dotfiles like .env; true = hide them
+        custom = {},
     },
 
     -- 3️⃣ Git integration

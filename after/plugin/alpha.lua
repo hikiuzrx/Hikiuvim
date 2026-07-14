@@ -36,3 +36,5 @@ end
 -- 3. Footer info
 dashboard.section.footer.val = "⚡ HIKIUVIM Engine | " .. #vim.api.nvim_list_runtime_paths() .. " components"
 dashboard.section.footer.opts.hl = "Comment"
+
+require('alpha').setup(dashboard.opts)

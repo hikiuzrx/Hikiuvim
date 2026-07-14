@@ -28,7 +28,7 @@ end
 -- 2️⃣ ToggleTerm setup
 -- ====================================
 require("toggleterm").setup({
-    open_mapping = [[<leader>j]],
+    open_mapping = [[<C-\>]], -- was <leader>j, which conflicted with <C-w>j window move
     direction = 'horizontal',
     size = 15,
     persist_size = true,

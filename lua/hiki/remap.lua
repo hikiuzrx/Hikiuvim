@@ -1,15 +1,10 @@
-vim.keymap.set("n","<leader>ex", vim.cmd.Ex)
-vim.keymap.set('n', '<leader>vs', function()
-  vim.cmd("vsplit")
-end, { desc = "Vertical split current file" })
--- Open current file in a horizontal split (same buffer)
-vim.keymap.set('n', '<leader>hs', function()
-  vim.cmd("split")
-end, { desc = "Horizontal split current file" })
-vim.keymap.set('n', '<leader>h', '<C-w>h', { desc = "Move to left split" })
-vim.keymap.set('n', '<leader>l', '<C-w>l', { desc = "Move to right split" })
-vim.keymap.set('n', '<leader>j', '<C-w>j', { desc = "Move to bottom split" })
-vim.keymap.set('n', '<leader>k', '<C-w>k', { desc = "Move to top split" })
+vim.keymap.set("n", "<leader>ex", vim.cmd.Ex)
+
+-- Splits: renamed <leader>hs -> <leader>sp to free the <leader>h prefix for gitsigns
+vim.keymap.set('n', '<leader>vs', function() vim.cmd("vsplit") end, { desc = "Vertical split" })
+vim.keymap.set('n', '<leader>sp', function() vim.cmd("split") end,  { desc = "Horizontal split" })
+
+-- Window resize (window movement uses native <C-w>hjkl)
 vim.keymap.set('n', '<leader>>', '<C-w>>', { desc = "Increase split width" })
 vim.keymap.set('n', '<leader><', '<C-w><', { desc = "Decrease split width" })
 vim.keymap.set('n', '<leader>+', '<C-w>+', { desc = "Increase split height" })
