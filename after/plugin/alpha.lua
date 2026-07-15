@@ -38,3 +38,20 @@ dashboard.section.footer.val = "⚡ HIKIUVIM Engine | " .. #vim.api.nvim_list_ru
 dashboard.section.footer.opts.hl = "Comment"
 
 require('alpha').setup(dashboard.opts)
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "AlphaReady",
+    callback = function()
+        local alpha_buf = vim.api.nvim_get_current_buf()
+        vim.api.nvim_create_autocmd("BufEnter", {
+            callback = function()
+                if vim.api.nvim_get_current_buf() ~= alpha_buf
+                    and vim.bo.buftype == ""
+                    and vim.fn.bufname() ~= "" then
+                    vim.api.nvim_buf_delete(alpha_buf, { force = true })
+                    return true -- remove this autocmd
+                end
+            end,
+        })
+    end,
+})

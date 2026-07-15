@@ -10,32 +10,30 @@ mason_lsp.setup({
         "lua_ls", "html", "cssls", "emmet_ls", "dockerls",
         "yamlls", "prismals", "sqls", "zls"
     },
-})
+    handlers = {
+        function(server_name)
+            local opts = { capabilities = capabilities }
 
--- handlers pattern: called automatically for every installed server
-mason_lsp.setup_handlers({
-    function(server_name)
-        local opts = { capabilities = capabilities }
-
-        if server_name == "pyright" then
-            local venv_path = vim.fn.getcwd() .. "/.venv/bin/python3"
-            if uv.fs_stat(venv_path) then
-                opts.settings = { python = { pythonPath = venv_path } }
+            if server_name == "pyright" then
+                local venv_path = vim.fn.getcwd() .. "/.venv/bin/python3"
+                if uv.fs_stat(venv_path) then
+                    opts.settings = { python = { pythonPath = venv_path } }
+                end
             end
-        end
 
-        if server_name == "zls" then
-            opts.settings = {
-                zls = {
-                    enable_inlay_hints = true,
-                    enable_snippets = true,
-                    warn_style = true,
+            if server_name == "zls" then
+                opts.settings = {
+                    zls = {
+                        enable_inlay_hints = true,
+                        enable_snippets = true,
+                        warn_style = true,
+                    }
                 }
-            }
-        end
+            end
 
-        lspconfig[server_name].setup(opts)
-    end,
+            lspconfig[server_name].setup(opts)
+        end,
+    },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
