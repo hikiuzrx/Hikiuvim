@@ -48,7 +48,9 @@ vim.api.nvim_create_autocmd("User", {
                 if vim.api.nvim_get_current_buf() ~= alpha_buf
                     and vim.bo.buftype == ""
                     and vim.fn.bufname() ~= "" then
-                    vim.api.nvim_buf_delete(alpha_buf, { force = true })
+                    if vim.api.nvim_buf_is_valid(alpha_buf) then
+                        vim.api.nvim_buf_delete(alpha_buf, { force = true })
+                    end
                     return true -- remove this autocmd
                 end
             end,
