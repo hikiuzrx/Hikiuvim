@@ -2,7 +2,7 @@ require("presence").setup({
     -- Client options
     auto_update         = true,
     neovim_image_text   = "The One True Editor",
-    main_image          = "neovim",                   -- "neovim" or "file"
+    main_image          = "file",                     -- "neovim" or "file"
     
     -- Rich Presence text options
     editing_text        = "Editing %s",               -- e.g. "Editing init.lua"

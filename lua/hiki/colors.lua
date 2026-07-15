@@ -1,5 +1,5 @@
 function ColorScheme(color)
-	color = color or "poimandres"
+	color = color or "oxocarbon"
 	vim.cmd.colorscheme(color)
 
 	-- background settings

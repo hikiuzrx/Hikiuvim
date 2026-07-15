@@ -14,7 +14,7 @@ require("lazy").setup({
     "nvim-lua/plenary.nvim",
 
     -- Theme (must load first)
-    { "olivercederborg/poimandres.nvim", lazy = false, priority = 1000 },
+    { "nyoom-engineering/oxocarbon.nvim", lazy = false, priority = 1000 },
     { "nvim-tree/nvim-web-devicons",     lazy = true },
 
     -- Dashboard
@@ -69,6 +69,18 @@ require("lazy").setup({
 
     -- Terminal
     { "akinsho/toggleterm.nvim", version = "*" },
+
+    -- Formatting
+    "stevearc/conform.nvim",
+
+    -- LSP progress
+    "j-hui/fidget.nvim",
+
+    -- Keybinding hints
+    "folke/which-key.nvim",
+
+    -- Session management
+    "folke/persistence.nvim",
 }, {
     ui = { border = "rounded" },
 })
