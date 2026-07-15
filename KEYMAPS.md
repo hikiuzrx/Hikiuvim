@@ -15,6 +15,10 @@
 | n | `<leader><` | Decrease split width |
 | n | `<leader>+` | Increase split height |
 | n | `<leader>-` | Decrease split height |
+| n | `<C-d>` | Scroll down half page (centered) |
+| n | `<C-u>` | Scroll up half page (centered) |
+| v | `J` | Move selection down |
+| v | `K` | Move selection up |
 
 ---
 
@@ -147,3 +151,13 @@
 | Mode | Key | Action |
 |------|-----|--------|
 | n | `<leader>u` | Toggle Undotree |
+
+---
+
+## Persistence (`after/plugin/persistence.lua`)
+
+| Mode | Key | Action |
+|------|-----|--------|
+| n | `<leader>qs` | Restore session for current directory |
+| n | `<leader>ql` | Restore last session |
+| n | `<leader>qd` | Don't save session on exit |
