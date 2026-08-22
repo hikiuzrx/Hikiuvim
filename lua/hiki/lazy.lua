@@ -56,6 +56,21 @@ require("lazy").setup({
     -- Treesitter
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
+    -- Markdown: GitHub-style preview inside Neovim (no browser)
+    --   markview  -> renders headings/tables/code/checkboxes in-buffer
+    --   image     -> draws real images via Kitty graphics protocol
+    --   diagram   -> turns ```mermaid blocks into rendered images
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+    },
+    { "3rd/image.nvim" },
+    { "3rd/diagram.nvim", dependencies = { "3rd/image.nvim" } },
+
     -- Utilities
     "mbbill/undotree",
     "windwp/nvim-autopairs", -- vim-closer removed: conflicts with nvim-autopairs
