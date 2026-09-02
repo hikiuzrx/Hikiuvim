@@ -13,6 +13,9 @@ Theme: [oxocarbon.nvim](https://github.com/nyoom-engineering/oxocarbon.nvim) · 
 - **`ripgrep`** — required for telescope live grep (`brew install ripgrep`)
 - **Node.js** — required by several LSP servers (`ts_ls`, `html`, `cssls`, etc.)
 - **`trash`** — optional, for nvim-tree trash support (`brew install trash`)
+- **Kitty terminal** — optional, for inline markdown images (uses the Kitty graphics protocol)
+- **ImageMagick** (`magick`) — optional, image processing for `image.nvim` (`brew install imagemagick`)
+- **`mmdc`** — optional, renders mermaid diagrams (`npm i -g @mermaid-js/mermaid-cli`)
 
 ---
 
@@ -67,6 +70,7 @@ nvim/
     ├── harpoon.lua              # File marks and quick switching
     ├── lsp.lua                  # Mason + LSP servers + diagnostics
     ├── lualine.lua              # Status line theme
+    ├── markdown.lua             # In-buffer markdown preview (markview + image + diagram)
     ├── nvim-tree.lua            # File explorer
     ├── persistence.lua          # Session save/restore
     ├── telescope.lua            # Fuzzy finder layout and keymaps
@@ -224,6 +228,18 @@ Formatters must be installed separately (e.g. `npm i -g prettier`, `pip install 
 
 ---
 
+### Markdown
+
+Configured in `after/plugin/markdown.lua`. Three cooperating layers give a GitHub-style preview **inside** Neovim — no browser. Toggle with `<leader>mp`.
+
+| Plugin | Purpose |
+|--------|---------|
+| [markview.nvim](https://github.com/OXY2DEV/markview.nvim) | Renders headings, tables, code blocks, and checkboxes in-buffer. Loaded eagerly (`lazy = false`). |
+| [image.nvim](https://github.com/3rd/image.nvim) | Draws real images via the Kitty graphics protocol. Needs Kitty + ImageMagick (`magick`). |
+| [diagram.nvim](https://github.com/3rd/diagram.nvim) | Turns ` ```mermaid ` blocks into rendered images. Needs `mmdc`. Set up after image.nvim (load order matters, hence one file). |
+
+---
+
 ### Git
 
 | Plugin | Purpose |
@@ -325,11 +341,11 @@ On startup, if a `.env` file exists in the project root, its variables are loade
 | n | `<leader>pc` | Close/collapse folder |
 | n | `<leader>pa` | Create file or folder |
 | n | `<leader>pd` | Delete file or folder |
-| n | `<leader>prn` | Rename file or folder |
+| n | `<leader>pR` | Rename file or folder |
 | n | `<leader>py` | Copy file or folder |
 | n | `<leader>px` | Cut file or folder |
 | n | `<leader>pp` | Paste file or folder |
-| n | `<leader>ps` | Copy absolute path to clipboard |
+| n | `<leader>pP` | Copy absolute path to clipboard |
 | n | `<leader>ph` | Toggle hidden files (dotfiles) |
 
 ### LSP *(active when a language server is attached)*
@@ -371,16 +387,26 @@ On startup, if a `.env` file exists in the project root, its variables are loade
 | n | `<leader>hD` | Diff against previous commit |
 | n | `<leader>tb` | Toggle inline blame |
 
+### Markdown (markview)
+
+| Mode | Key | Action |
+|------|-----|--------|
+| n | `<leader>mp` | Toggle in-buffer markdown preview |
+
 ### Terminal (toggleterm)
 
 | Mode | Key | Action |
 |------|-----|--------|
 | n | `<C-\>` | Toggle terminal |
+| n | `<leader>t1`–`t4` | Open independent terminal #1–#4 horizontally (each its own shell) |
+| n | `<leader>tv1`–`tv4` | Open independent terminal #1–#4 vertically |
 | n | `<leader>tg` | Jump to terminal by number (prompts) |
+| n / t | `<leader>tq` | Kill current terminal (ends its shell, frees the number) |
 | t | `<Esc>` or `jk` | Exit terminal mode |
 | t | `<C-k>` | Move focus to the window above |
 | t | `<C-n>` | Next terminal |
 | t | `<C-p>` | Previous terminal |
+| t | `<leader>tn` | Toggle terminal by command |
 | t | `<leader>tg` | Jump to terminal by number (prompts) |
 
 ### Session (persistence)

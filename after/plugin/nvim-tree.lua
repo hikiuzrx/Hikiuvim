@@ -86,7 +86,9 @@ vim.keymap.set("n", "<leader>pc", api.node.navigate.parent_close, { desc = "Clos
 -- Create / Delete / Rename
 vim.keymap.set("n", "<leader>pa", api.fs.create, { desc = "Create File/Folder" })
 vim.keymap.set("n", "<leader>pd", api.fs.remove, { desc = "Delete File/Folder" })
-vim.keymap.set("n", "<leader>prn", api.fs.rename, { desc = "Rename File/Folder" })
+-- NOTE: was <leader>prn, but <leader>pr (reload) is a prefix of it, which
+-- forced a timeoutlen delay on reload. Moved to <leader>pR to remove the overlap.
+vim.keymap.set("n", "<leader>pR", api.fs.rename, { desc = "Rename File/Folder" })
 
 -- Copy / Cut / Paste
 vim.keymap.set("n", "<leader>py", api.fs.copy.node, { desc = "Copy File/Folder" })
@@ -94,7 +96,10 @@ vim.keymap.set("n", "<leader>px", api.fs.cut, { desc = "Cut File/Folder" })
 vim.keymap.set("n", "<leader>pp", api.fs.paste, { desc = "Paste File/Folder" })
 
 -- System clipboard
-vim.keymap.set("n", "<leader>ps", api.fs.copy.absolute_path, { desc = "Copy Absolute Path" })
+-- NOTE: was <leader>ps, which collided with telescope's grep-search map.
+-- telescope loads after nvim-tree (alphabetical after/plugin order), so it
+-- silently won that binding. Moved here to <leader>pP to free the conflict.
+vim.keymap.set("n", "<leader>pP", api.fs.copy.absolute_path, { desc = "Copy Absolute Path" })
 
 -- Show hidden files toggle
 vim.keymap.set("n", "<leader>ph", api.tree.toggle_hidden_filter, { desc = "Toggle Hidden Files" })
