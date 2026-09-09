@@ -24,6 +24,7 @@ vim.opt.signcolumn = "yes"
 
 -- Behavior
 vim.opt.updatetime = 50
+vim.opt.completeopt = "menu,menuone,noselect" -- reliable completion popup while typing
 vim.opt.clipboard = "unnamedplus"
 vim.opt.undofile = true
 vim.opt.swapfile = false

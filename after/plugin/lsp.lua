@@ -54,6 +54,6 @@ vim.diagnostic.config({
     virtual_text = true,
     signs = true,
     underline = true,
-    update_in_insert = false, -- don't re-render diagnostics on every keystroke
+    update_in_insert = true, -- show diagnostics live while typing in insert mode
     severity_sort = true,
 })

@@ -1,6 +1,10 @@
 local cmp = require('cmp')
 
 cmp.setup({
+    completion = {
+        autocomplete = { cmp.TriggerEvent.TextChanged }, -- pop up as you type
+        completeopt = 'menu,menuone,noselect',
+    },
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
