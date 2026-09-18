@@ -37,6 +37,11 @@ end
 dashboard.section.footer.val = "⚡ HIKIUVIM Engine | " .. #vim.api.nvim_list_runtime_paths() .. " components"
 dashboard.section.footer.opts.hl = "Comment"
 
+-- Avoid a known alpha-nvim crash ("Invalid window id") where its WinResized
+-- autocmd redraws using a stale cached window handle after splits/terminals
+-- open and close around the dashboard.
+dashboard.opts.opts.redraw_on_resize = false
+
 require('alpha').setup(dashboard.opts)
 
 vim.api.nvim_create_autocmd("User", {
