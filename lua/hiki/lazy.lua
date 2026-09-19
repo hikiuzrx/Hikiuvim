@@ -54,7 +54,7 @@ require("lazy").setup({
     "L3MON4D3/LuaSnip",
 
     -- Treesitter
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter", branch = "master", build = ":TSUpdate" },
 
     -- Markdown: GitHub-style preview inside Neovim (no browser)
     --   markview  -> renders headings/tables/code/checkboxes in-buffer

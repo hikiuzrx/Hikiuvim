@@ -15,10 +15,11 @@ ts.setup {
     parser_install_dir = parser_path,
 
     -- A balanced list of languages for a pro developer
-    ensure_installed = { 
-        "lua", "vimdoc", "javascript", "typescript", 
-        "python", "rust", "go", "html", "css", "tsx", 
-        "markdown", "markdown_inline", "json", "bash", "vim"
+    ensure_installed = {
+        "lua", "vimdoc", "javascript", "typescript",
+        "python", "rust", "go", "html", "css", "tsx",
+        "markdown", "markdown_inline", "json", "bash", "vim",
+        "yaml"
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
