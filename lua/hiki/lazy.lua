@@ -78,6 +78,9 @@ require("lazy").setup({
     -- Discord
     "andweeb/presence.nvim",
 
+    -- WakaTime (coding time tracking)
+    { "wakatime/vim-wakatime", lazy = false },
+
     -- Git
     "lewis6991/gitsigns.nvim",
     "tpope/vim-fugitive",
