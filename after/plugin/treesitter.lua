@@ -9,6 +9,10 @@ if vim.fn.isdirectory(parser_path) == 0 then
     vim.fn.mkdir(parser_path, "p")
 end
 
+-- Prepend before setup(): ensure_installed only counts a parser as installed
+-- if it's on the runtimepath, otherwise it re-downloads all of them.
+vim.opt.runtimepath:prepend(parser_path)
+
 -- 2. Configuration
 ts.setup {
     -- Tell TS where to find/install everything
@@ -25,8 +29,9 @@ ts.setup {
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
-    -- Automatically install missing parsers when entering buffer
-    auto_install = true,
+    -- Don't download parsers when opening a buffer: it blocks on network
+    -- errors when GitHub is unreachable. Install explicitly with :TSInstall.
+    auto_install = false,
 
     highlight = {
         enable = true,
@@ -50,7 +55,3 @@ ts.setup {
         },
     },
 }
-
--- 3. Runtime Path Injection
--- We prepend it so Neovim looks here FIRST for parsers
-vim.opt.runtimepath:prepend(parser_path)
